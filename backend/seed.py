@@ -12,13 +12,14 @@ from models import User, VolunteerProfile, OrganisationProfile, Mission, Mission
 from auth import get_password_hash
 from matching import calculate_match_score
 
-def seed_database():
+def seed_database(drop_existing=True):
     print("--------------------------------------------------")
     print("Seeding SevaPath Database...")
     print("--------------------------------------------------")
 
-    # Recreate tables cleanly
-    Base.metadata.drop_all(bind=engine)
+    # Recreate tables if drop_existing is True
+    if drop_existing:
+        Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
 
     db = SessionLocal()

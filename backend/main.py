@@ -21,6 +21,17 @@ from config import PORT
 # Create database tables
 Base.metadata.create_all(bind=engine)
 
+# Auto-seed database if empty (ensures demo data on fresh Vercel / Cloud deployments)
+try:
+    from database import SessionLocal
+    with SessionLocal() as init_db:
+        if init_db.query(User).count() == 0:
+            print("[SevaPath] Empty database detected. Auto-seeding initial community data...")
+            from seed import seed_database
+            seed_database(drop_existing=False)
+except Exception as e:
+    print(f"[SevaPath] Database startup auto-seed check: {e}")
+
 app = FastAPI(
     title="SevaPath API",
     description="Community Volunteer Matching Platform with Explainable AI",
