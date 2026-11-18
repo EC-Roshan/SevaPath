@@ -13,10 +13,14 @@ else:
 
 DATABASE_URL = os.getenv("DATABASE_URL", "").strip()
 if not DATABASE_URL:
-    # Always resolve to a consistent database file inside backend/
-    base_dir = Path(__file__).resolve().parent
-    db_file = (base_dir / "sevapath.db").as_posix()
-    DATABASE_URL = f"sqlite:///{db_file}"
+    if os.getenv("VERCEL"):
+        # Vercel serverless functions have a read-only filesystem except /tmp
+        DATABASE_URL = "sqlite:////tmp/sevapath.db"
+    else:
+        # Always resolve to a consistent database file inside backend/
+        base_dir = Path(__file__).resolve().parent
+        db_file = (base_dir / "sevapath.db").as_posix()
+        DATABASE_URL = f"sqlite:///{db_file}"
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 JWT_SECRET = os.getenv("JWT_SECRET", "sevapath_dev_secret_key_change_me_in_prod")
