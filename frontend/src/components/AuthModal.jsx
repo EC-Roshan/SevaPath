@@ -170,33 +170,34 @@ export default function AuthModal({ initialMode = 'login', onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in overflow-y-auto">
-      <div
-        className={`bg-white rounded-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative my-8 transition-all ${
-          mode === 'signup' && role === 'volunteer' ? 'max-w-2xl' : 'max-w-md'
-        }`}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors z-10"
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm p-4 sm:p-6 animate-in fade-in">
+      <div className="min-h-full flex items-start sm:items-center justify-center py-6 sm:py-10">
+        <div
+          className={`bg-white rounded-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative transition-all ${
+            mode === 'signup' && role === 'volunteer' ? 'max-w-2xl' : 'max-w-md'
+          }`}
         >
-          <X className="w-5 h-5" />
-        </button>
+          <button
+            onClick={onClose}
+            className="absolute top-5 right-5 text-slate-400 hover:text-slate-600 p-1.5 rounded-xl hover:bg-slate-100 transition-colors z-10"
+          >
+            <X className="w-5 h-5" />
+          </button>
 
-        {/* Modal Brand */}
-        <div className="text-center mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-[#0F2744] mx-auto flex items-center justify-center text-white shadow-md mb-3">
-            <HeartHandshake className="w-7 h-7 text-[#0F9D8A]" />
+          {/* Modal Brand */}
+          <div className="text-center mb-5">
+            <div className="w-11 h-11 rounded-2xl bg-[#0F2744] mx-auto flex items-center justify-center text-white shadow-md mb-2.5">
+              <HeartHandshake className="w-6 h-6 text-[#0F9D8A]" />
+            </div>
+            <h2 className="text-xl sm:text-2xl font-black text-[#0F2744]">
+              {mode === 'login' ? 'Sign In to SevaPath' : 'Create an Account'}
+            </h2>
+            <p className="text-xs text-slate-500 mt-1">
+              {mode === 'login'
+                ? 'Enter your credentials to access your dashboard'
+                : 'Fill your profile details to immediately start matching with local missions'}
+            </p>
           </div>
-          <h2 className="text-2xl font-black text-[#0F2744]">
-            {mode === 'login' ? 'Sign In to SevaPath' : 'Create an Account'}
-          </h2>
-          <p className="text-xs text-slate-500 mt-1">
-            {mode === 'login'
-              ? 'Enter your credentials to access your dashboard'
-              : 'Fill your profile details to immediately start matching with local missions'}
-          </p>
-        </div>
 
         {error && (
           <div className="mb-4 p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs flex items-center gap-2">
@@ -794,5 +795,6 @@ export default function AuthModal({ initialMode = 'login', onClose }) {
         </div>
       </div>
     </div>
+  </div>
   );
 }
