@@ -102,35 +102,35 @@ def signup(data: schemas.UserSignup, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(user)
 
-    # Initialize default profile
+    # Initialize profile with user-provided onboarding data
     if data.role == "volunteer":
         v_name = data.name.strip() if data.name else data.email.split("@")[0].capitalize()
         profile = VolunteerProfile(
             user_id=user.id,
             name=v_name,
-            age=24,
-            contact=data.email,
-            interests=["Community Welfare", "Food Relief"],
-            skills=["Teamwork", "Communication"],
-            experience_level="beginner",
-            availability={"days": ["Saturday", "Sunday"], "hours": ["Morning", "Afternoon"]},
-            location_lat=26.8467,
-            location_lng=80.9462,
-            neighbourhood_name="Hazratganj",
-            max_distance_km=10.0,
-            willingness_to_learn=True
+            age=data.age or 22,
+            contact=data.contact or data.email,
+            interests=data.interests or ["Community Welfare"],
+            skills=data.skills or ["Teamwork"],
+            experience_level=data.experience_level or "beginner",
+            availability=data.availability or {"days": ["Saturday", "Sunday"], "hours": ["Morning"]},
+            location_lat=data.location_lat if data.location_lat is not None else 26.8467,
+            location_lng=data.location_lng if data.location_lng is not None else 80.9462,
+            neighbourhood_name=data.neighbourhood_name or "Hazratganj",
+            max_distance_km=data.max_distance_km if data.max_distance_km is not None else 10.0,
+            willingness_to_learn=data.willingness_to_learn if data.willingness_to_learn is not None else True
         )
         db.add(profile)
         db.commit()
         db.refresh(profile)
     else:
-        o_name = data.org_name.strip() if data.org_name else (data.name or "Seva Foundation")
+        o_name = data.org_name.strip() if data.org_name else (data.name or "Community Organisation")
         profile = OrganisationProfile(
             user_id=user.id,
             org_name=o_name,
-            contact=data.email,
-            location_city="Lucknow",
-            description="Grassroots community action group"
+            contact=data.contact or data.email,
+            location_city=data.location_city or "Lucknow",
+            description=data.description or "Community action group dedicated to social impact"
         )
         db.add(profile)
         db.commit()

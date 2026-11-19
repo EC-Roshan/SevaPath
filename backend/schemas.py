@@ -7,7 +7,20 @@ class UserSignup(BaseModel):
     password: str
     role: str  # "volunteer" or "organisation"
     name: Optional[str] = None  # Full name or Org name
+    age: Optional[int] = 22
+    contact: Optional[str] = None
+    interests: Optional[List[str]] = []
+    skills: Optional[List[str]] = []
+    experience_level: Optional[str] = "beginner"  # beginner, some, experienced
+    availability: Optional[Dict[str, Any]] = {"days": ["Saturday", "Sunday"], "hours": ["Morning"]}
+    location_lat: Optional[float] = 26.8467
+    location_lng: Optional[float] = 80.9462
+    neighbourhood_name: Optional[str] = "Hazratganj"
+    max_distance_km: Optional[float] = 10.0
+    willingness_to_learn: Optional[bool] = True
     org_name: Optional[str] = None
+    location_city: Optional[str] = "Lucknow"
+    description: Optional[str] = None
 
 class UserLogin(BaseModel):
     email: EmailStr

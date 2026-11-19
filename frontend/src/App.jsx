@@ -77,14 +77,14 @@ function MainApp() {
                   {/* Call to Actions */}
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
                     <button
-                      onClick={() => openAuth('signup', 'volunteer')}
+                      onClick={() => openAuth('login', 'volunteer')}
                       className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#0F9D8A] hover:bg-[#0C8575] text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2"
                     >
                       <span>Join as a Volunteer</span>
                       <ArrowRight className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => openAuth('signup', 'organisation')}
+                      onClick={() => openAuth('login', 'organisation')}
                       className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-[#0F2744] hover:bg-[#0A1B30] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2"
                     >
                       <Building2 className="w-4 h-4 text-[#0F9D8A]" />
@@ -213,7 +213,7 @@ function MainApp() {
                 </p>
                 <div className="pt-2 flex flex-wrap justify-center gap-3">
                   <button
-                    onClick={() => openAuth('signup')}
+                    onClick={() => openAuth('login')}
                     className="px-6 py-3 rounded-xl bg-[#0F9D8A] hover:bg-[#0C8575] text-white font-bold text-sm shadow-md transition-all"
                   >
                     Get Started Now
