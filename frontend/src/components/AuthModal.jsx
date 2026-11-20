@@ -171,7 +171,7 @@ export default function AuthModal({ initialMode = 'login', onClose }) {
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm p-4 sm:p-6 animate-in fade-in">
-      <div className="min-h-full flex items-start sm:items-center justify-center py-6 sm:py-10">
+      <div className="min-h-full flex items-start justify-center py-8 sm:py-12">
         <div
           className={`bg-white rounded-3xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative transition-all ${
             mode === 'signup' && role === 'volunteer' ? 'max-w-2xl' : 'max-w-md'
